@@ -118,15 +118,14 @@ public class CasosDePrueba {
 			vital.agregarAlCarrito(numeroDeVenta, PRODUCTO_A_COMPRAR_2);
 		} catch (ProductoSinStock e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} catch (ProductoInexistente e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		System.out.println(e.getMessage());
 		}
 
 		
 		
-//		assertEquals((Integer)720, vital.getVenta(numeroDeVenta).getImporte(), 0.01);
+	assertEquals((Integer)720, vital.getVenta(numeroDeVenta).getImporte(), 0.01);
 	}
 	
 	@Test (expected = ProductoInexistente.class)

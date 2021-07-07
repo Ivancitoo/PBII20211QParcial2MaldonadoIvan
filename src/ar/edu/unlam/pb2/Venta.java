@@ -4,19 +4,15 @@ public class Venta {
 	private Integer dniDelComprador;
 	private String nombreDelComprador;
 	private Integer nroDeVenta;
-	
+	private Double importe;
 	public Venta(Integer dniDelComprador, String nombreDelComprador) {
 		this.dniDelComprador = dniDelComprador;
 		this.nombreDelComprador = nombreDelComprador;
-				
+		this.nroDeVenta = 0;
+		this.importe = 0.0;
 	}
 	
-	public Venta(Integer nroDeVenta, Integer dniDelComprador, String nombreDelComprador) {
-		this.nroDeVenta = nroDeVenta;
-		this.dniDelComprador = dniDelComprador;
-		this.nombreDelComprador = nombreDelComprador;
-				
-	}
+
 
 	public Integer getDniDelComprador() {
 		return dniDelComprador;
@@ -53,6 +49,11 @@ public class Venta {
 		} else if (!nroDeVenta.equals(other.nroDeVenta))
 			return false;
 		return true;
+	}
+
+	public Double getImporte() {
+		// TODO Auto-generated method stub
+		return this.importe;
 	}
 
 }

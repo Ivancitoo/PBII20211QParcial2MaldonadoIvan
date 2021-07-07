@@ -75,7 +75,7 @@ public class Supermercado {
 	public Venta getVenta(Integer numeroDeVenta) {
 		// Devuelve una venta en función de su número identificatorio
 		
-	
+	}
 
 	public void agregarAlCarrito(Integer numeroDeVenta, Integer codigoDeProducto) throws ProductoSinStock, ProductoInexistente {
 		// Incorpora al carrito de compras de la venta identificada por el "numeroDeVenta", el producto identificado por el "codigoDeProducto"
