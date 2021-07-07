@@ -3,9 +3,12 @@ package ar.edu.unlam.pb2;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+
 
 public class Supermercado {
 	
@@ -17,13 +20,17 @@ public class Supermercado {
 	
 	public Supermercado(String nombre) {
 		// Constructor de la clase
-		this.productosExistentes = new HashSet();
-		this.productosDisponibles = new ArrayList();
-		this.ventasRealizadas = new HashMap();
+		this.nombre=nombre;
+		this.productosExistentes = new HashSet<>();
+		this.productosDisponibles = new ArrayList<>();
+		this.ventasRealizadas = new HashMap<>();
 	}
 
 	public void ingresarProducto(Producto nuevo) {
-		this.productosDisponibles.add(nuevo);	
+		this.productosExistentes.add(nuevo);
+		this.productosDisponibles.add(nuevo);
+		nuevo.subirStock();
+		
 	}
 
 	public Set<Producto> getOfertaDeProductos() {
@@ -33,14 +40,30 @@ public class Supermercado {
 	
 	public Integer getStock(Integer codigo) {
 		// Devuelve la cantidad de unidades de un producto determinado
+		Integer stockObtenido = 0;
+		for (Producto producto : productosDisponibles) {
+			if(producto.getCodigo().equals(codigo))
+				stockObtenido += producto.getStock();
+		}
+		return stockObtenido;
+		
 	}
 	
 	private Boolean productoExiste(Integer codigoDeProducto) throws ProductoInexistente{
-		// Verifica si un producto existe
+	for (Producto producto : productosExistentes) {
+		if(producto.getCodigo().equals(codigoDeProducto) && producto != null)
+			return true;
+	}
+	throw new ProductoInexistente();
 	}
 	
 	private Producto getProductoPorCodigo(Integer codigoDeProducto) throws ProductoSinStock {
 		// Busca la disponibilidad de un producto
+		for (Producto producto : productosDisponibles) {
+			if(producto.getCodigo().equals(codigoDeProducto) && producto.getStock()>0)
+				return producto;
+		}
+		throw new ProductoSinStock();
 	}
 	
 	public Integer registrarNuevaVenta(Integer dniDelComprador, String nombreDelComprador) {
@@ -49,9 +72,10 @@ public class Supermercado {
 		return contadorDeVentas;
 	}
 	
-	public Venta getVenta(Integer nueroDeVenta) {
+	public Venta getVenta(Integer numeroDeVenta) {
 		// Devuelve una venta en función de su número identificatorio
-	}
+		
+	
 
 	public void agregarAlCarrito(Integer numeroDeVenta, Integer codigoDeProducto) throws ProductoSinStock, ProductoInexistente {
 		// Incorpora al carrito de compras de la venta identificada por el "numeroDeVenta", el producto identificado por el "codigoDeProducto"
